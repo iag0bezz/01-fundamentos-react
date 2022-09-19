@@ -1,0 +1,92 @@
+.comment {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.comment > img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+}
+
+.box {
+  flex: 1;
+}
+
+.content {
+  background: var(--gray-700);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.content header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+}
+
+.author strong {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.author time {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: varh(--gray-400);
+}
+
+.content header button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  cursor: pointer;
+  
+  line-height: 0;
+  border-radius: 2px;
+
+  transition: color 0.2s;
+}
+
+.content header button:hover {
+  color: var(--red-500);
+}
+
+.content p {
+  margin-top: 1rem;
+  color: var(--gray-300);
+}
+
+.box footer {
+  margin-top: 1rem;
+}
+
+.box footer button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  border-radius: 2px;
+}
+
+.box footer svg {
+  margin-right: 0.5rem;
+}
+
+.box footer button:hover {
+  color: var(--green-300);
+}
+
+.box footer button span::before {
+  content: "\2022";
+  padding: 0 0.25rem
+}
