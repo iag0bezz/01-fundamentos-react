@@ -1,36 +1,62 @@
 import { ThumbsUp, Trash } from 'phosphor-react';
+import { Comment as CommentType } from '../../App';
 import { Avatar } from '../Avatar';
 import styles from './styles.module.css';
 
-export const Comment = () => {
+import { format, formatDistanceToNow } from 'date-fns';
+import pt_BR from 'date-fns/locale/pt-BR'
+
+interface IProps {
+  comment: CommentType;
+  deleteComment: (id: number) => void;
+}
+
+export const Comment = ({ comment, deleteComment }: IProps) => {
+  const published_date_formatted = format(
+    comment.published_at,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: pt_BR
+    }
+  ) 
+
+  const published_date_RTN = formatDistanceToNow(
+    comment.published_at,
+    {
+      locale: pt_BR,
+      addSuffix: true
+    }
+  )
+
   return (
     <div className={styles.comment}>
-      <Avatar border={false} url='https://github.com/ianlibanio.png' />
+      <Avatar border={false} url={comment.author.avatar_url} />
 
       <div className={styles.box}>
         <div className={styles.content}>
           <header>
             <div className={styles.author}>
-              <strong>Ian Libânio</strong>
+              <strong>{comment.author.name}</strong>
               <time
-                title='19 de Setembro de 2022'
+                title={published_date_formatted}
+                dateTime={comment.published_at.toISOString()}
               >
-                Cerca de 1h atrás
+                {published_date_RTN}
               </time>
             </div>
 
-            <button title='Deletar comentário'>
+            <button onClick={() => deleteComment(comment.id)} title='Deletar comentário'>
               <Trash size={24} />
             </button>
           </header>
 
-          <p>Muito bom Diego, parabéns!!</p>
+          <p>{comment.content}</p>
         </div>
 
         <footer>
           <button>
             <ThumbsUp />
-            Aplaudir <span>20</span>
+            Aplaudir <span>{comment.likes}</span>
           </button>
         </footer>
       </div>
